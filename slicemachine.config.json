@@ -1,0 +1,5 @@
+{
+  "repositoryName": "suburbia-skate",
+  "adapter": "@slicemachine/adapter-next",
+  "libraries": ["./slices"]
+}
