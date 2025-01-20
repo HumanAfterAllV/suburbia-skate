@@ -1,0 +1,40 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Chamber"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Elit culpa consequat ullamco culpa et duis esse. Deserunt non nisi exercitation velit laboris cillum. Cillum nisi ea sint commodo sit do et eu fugiat occaecat sint sit aliquip eu labore."
+						}
+					}
+				]
+			},
+			"button": {
+				"__TYPE__": "LinkContent",
+				"key": "c2f4af31-60ed-4fc7-9741-fd14e4d697b3",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://slicemachine.dev",
+					"text": "sand"
+				}
+			}
+		},
+		"items": []
+	}
+]

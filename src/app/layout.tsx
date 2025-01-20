@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bowlby_One_SC, DM_Mono } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+
+const bowlby = Bowlby_One_SC({
+  display: "swap",
   subsets: ["latin"],
+  variable: "--font-bowlby-one-sc",
+  weight: ["400"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const dmMono = DM_Mono({
+  display: "swap",
   subsets: ["latin"],
+  variable: "--font-dm-mono",
+  weight: ["500"],
 });
 
 export const metadata: Metadata = {
@@ -24,10 +30,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${bowlby.variable} ${dmMono.variable} antialiased font-mono`}>
+        <main>
+          <Header />
+          {children}
+
+        </main>
       </body>
     </html>
   );
