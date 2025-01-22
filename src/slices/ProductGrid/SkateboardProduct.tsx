@@ -40,11 +40,9 @@ export default async function SkateboardProduct({id}: Props): JSX.Element {
 
     const dominantColors = isFilled.image(product.data.image) ? await getDominantColor(product.data.image.url) : "currentColor";
 
-    console.log(dominantColors);
 
     return(
         <div className="group relative mx-auto w-full max-w-72 px-8 pt-4">
-            
             <VerticalLine className={clsx(VERTICAL_LINE_CLASS, "left-4")}/>
             <VerticalLine className={clsx(VERTICAL_LINE_CLASS, "right-4")}/>
             <HorizontalLine className={HORIZONTAL_LINE_CLASS}/>
