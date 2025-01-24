@@ -7,9 +7,15 @@ import { Heading } from "@/components/Heading";
 import { ButtonLink } from "@/components/ButtonLink";
 import ParallaxImage from "@/components/ParallaxImage";
 
+declare module "react" {
+  interface CSSProperties {
+    "--index"?: number;
+  }
+}
+
 export type TextAndImageProps = SliceComponentProps<Content.TextAndImageSlice>;
 
-const TextAndImage = ({ slice }: TextAndImageProps): JSX.Element => {
+const TextAndImage = ({ slice, index }: TextAndImageProps) => {
 
   const theme = slice.primary.theme
   return (
@@ -17,11 +23,13 @@ const TextAndImage = ({ slice }: TextAndImageProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className={clsx(
+        "sticky top-[calc(var(--index)*2rem)]",
         theme === "Blue" && "bg-texture bg-brand-blue text-white",
         theme === "Orange" && "bg-texture bg-brand-orange text-white",
         theme === "Navy" && "bg-texture bg-brand-navy text-white",
         theme === "Lime" && "bg-texture bg-brand-lime text-white",
       )}
+      style={{"--index": index}}
     >
       <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-24">
         <div className={clsx("flex flex-col items-center gap-8 text-center md:items-start md:text-left", slice.variation === "imageOnLeft" && "md:order-2")}>

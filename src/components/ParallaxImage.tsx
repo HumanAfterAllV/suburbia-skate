@@ -11,7 +11,7 @@ type ParallaxProps = {
     className?: string;
 }
 
-export default function ParallaxImage({foregroundImage, backgroundImage, className}: ParallaxProps): JSX.Element {
+export default function ParallaxImage({foregroundImage, backgroundImage, className}: ParallaxProps) {
 
     const backgroundRef = useRef<HTMLDivElement>(null);
     const foregroundRef = useRef<HTMLDivElement>(null);
@@ -20,8 +20,10 @@ export default function ParallaxImage({foregroundImage, backgroundImage, classNa
     const currentPosition = useRef({x: 0, y:0})
 
     useEffect(() => {
+
         const frameId = requestAnimationFrame(animationFrame) //Start the animation loop
         window.addEventListener("mousemove", onMouseMove);
+
         function onMouseMove(e: MouseEvent) {
             const {innerWidth, innerHeight} = window;
 
@@ -55,6 +57,7 @@ export default function ParallaxImage({foregroundImage, backgroundImage, classNa
             window.removeEventListener("mousemove", onMouseMove)
             cancelAnimationFrame(frameId)
         }
+
     }, [])
 
     return (
