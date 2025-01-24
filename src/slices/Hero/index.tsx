@@ -1,5 +1,4 @@
 import { Content } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 
 import { Bounded } from "@/components/Bounded";
@@ -7,6 +6,7 @@ import { Heading } from "@/components/Heading";
 import { ButtonLink } from "@/components/ButtonLink";
 import { WideLogo } from "./WideLogo";
 import { TallLogo } from "./TallLogo";
+import InteractiveSkateboard from "./InteractiveSkateboard";
 
 /**
  * Props for `Hero`.
@@ -16,7 +16,7 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 /**
  * Component for "Hero" Slices.
  */
-const Hero = ({ slice }: HeroProps): JSX.Element => {
+const Hero = ({ slice }: HeroProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -40,6 +40,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
           </ButtonLink>  
         </div>
       </div> 
+      <InteractiveSkateboard/>
 
     </Bounded>
   );
