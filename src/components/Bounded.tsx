@@ -1,4 +1,4 @@
-import { CSSProperties, ElementType, ReactNode } from "react";
+import React, { CSSProperties, ElementType, ReactNode } from "react";
 import clsx from "clsx";
 
 type BoundedProps = {
@@ -13,7 +13,7 @@ export function Bounded({
   className,
   children,
   ...restProps
-}: BoundedProps) {
+}: BoundedProps): React.JSX.Element {
   return (
     <Comp
       className={clsx(
