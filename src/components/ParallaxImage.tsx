@@ -28,7 +28,7 @@ export default function ParallaxImage({foregroundImage, backgroundImage, classNa
             const {innerWidth, innerHeight} = window;
 
             const xPercent = (e.clientX / innerWidth - 0.5) * 2; //Range from -1 to 1
-            const yPercent = (e.clientX / innerHeight - 0.5) * 2; //Range from -1 to 1
+            const yPercent = (e.clientY / innerHeight - 0.5) * 2; //Range from -1 to 1
 
             targetPosition.current = {x: xPercent * -20, y: yPercent * -20}
         }
