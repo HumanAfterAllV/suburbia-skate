@@ -2,12 +2,12 @@
 
 import * as THREE from "three" 
 import { Skateboard } from "@/components/Skateboard"
-import { ContactShadows, Environment, Html } from "@react-three/drei"
+import { ContactShadows, Environment, /* Html */ } from "@react-three/drei"
 import { Canvas, ThreeEvent, useThree } from "@react-three/fiber"
 import { Suspense, useEffect, useRef, useState } from "react"
 import gsap from "gsap"
 import HotSpot from "./HotSpot"
-import { WavyPaths } from "./WavyPaths"
+/* import { WavyPaths } from "./WavyPaths" */
 
 const INITIAL_CAMERA_POSITION = [1.5, 1, 1.4] as const;
 
