@@ -2,11 +2,14 @@
 
 import * as THREE from "three" 
 import { Skateboard } from "@/components/Skateboard"
-import { ContactShadows, Environment, OrbitControls } from "@react-three/drei"
-import { Canvas, ThreeEvent } from "@react-three/fiber"
-import { Suspense, useRef, useState } from "react"
+import { ContactShadows, Environment, Html } from "@react-three/drei"
+import { Canvas, ThreeEvent, useThree } from "@react-three/fiber"
+import { Suspense, useEffect, useRef, useState } from "react"
 import gsap from "gsap"
 import HotSpot from "./HotSpot"
+import { WavyPaths } from "./WavyPaths"
+
+const INITIAL_CAMERA_POSITION = [1.5, 1, 1.4] as const;
 
 type InteractiveSkateboardProps = {
     deckTextureURL: string
@@ -19,7 +22,7 @@ export default function InteractiveSkateboard({deckTextureURL, wheelTextureURL, 
  
     return (
         <div className="absolute inset-0 flex items-center justify-center">
-            <Canvas className="min-h-[60rem] w-full" camera={{position: [1.5, 1, 3] , fov: 50}}>
+            <Canvas className="min-h-[60rem] w-full" camera={{position: INITIAL_CAMERA_POSITION , fov: 55}}>
                 <Suspense>
                     <Scene
                         deckTextureURL={deckTextureURL}
@@ -43,6 +46,51 @@ function Scene({deckTextureURL, wheelTextureURL, truckColor, boltColor}: Interac
         middle: true,
         back: true
     })
+    const [animating, setAnimating] = useState<boolean>(false)
+
+    const { camera } = useThree()
+
+    useEffect(() => {
+        if (!containerRef.current || !originRef.current) return;
+    
+        gsap.to(containerRef.current.position, {
+            x: 0.2,
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+        });
+    
+        gsap.to(originRef.current.rotation, {
+            y: Math.PI / 64,
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+        });
+      }, []);
+
+    useEffect(() => {
+        camera.lookAt(new THREE.Vector3(-0.2, 0.15, 0))
+
+        setZoom()
+
+        window.addEventListener("resize", setZoom)
+
+        function setZoom(){
+            const scale = Math.max(Math.min(1000 / window.innerWidth, 2.2), 1)
+
+            camera.position.x = INITIAL_CAMERA_POSITION[0] * scale
+            camera.position.y = INITIAL_CAMERA_POSITION[1] * scale
+            camera.position.z = INITIAL_CAMERA_POSITION[2] * scale
+        }
+
+        return() => {
+            window.removeEventListener("resize", setZoom)
+        }
+
+    },[camera])
+
 
     function onClick(event: ThreeEvent<MouseEvent>) {
 
@@ -51,7 +99,7 @@ function Scene({deckTextureURL, wheelTextureURL, truckColor, boltColor}: Interac
         const board = containerRef.current;
         const origin = originRef.current;
 
-        if(!board || !origin) return
+        if(!board || !origin || animating) return
 
         const {name} = event.object;
         
@@ -61,20 +109,20 @@ function Scene({deckTextureURL, wheelTextureURL, truckColor, boltColor}: Interac
         }))
 
         if(name === "back"){
-            Ollie(board)
+            ollie(board)
         }
         else if(name === "middle"){
-            Kickflip(board)
+            kickflip(board)
         }
         else if(name === "front"){
-            FrontSide360(board, origin)
+            frontSide360(board, origin)
         }
 
     }
 
-    function Ollie(board: THREE.Group) {
+    function ollie(board: THREE.Group) {
 
-        JumpBoard(board);
+        jumpboard(board);
             
         gsap.timeline().to(board.rotation, {
             x: -0.6,
@@ -93,9 +141,9 @@ function Scene({deckTextureURL, wheelTextureURL, truckColor, boltColor}: Interac
         })
     }
 
-    function Kickflip(board: THREE.Group) {
+    function kickflip(board: THREE.Group) {
 
-        JumpBoard(board);
+        jumpboard(board);
             
         gsap.timeline().to(board.rotation, {
             x: -0.6,
@@ -119,8 +167,8 @@ function Scene({deckTextureURL, wheelTextureURL, truckColor, boltColor}: Interac
         })  
     }
 
-    function FrontSide360(board: THREE.Group, origin: THREE.Group) {
-        JumpBoard(board);
+    function frontSide360(board: THREE.Group, origin: THREE.Group) {
+        jumpboard(board);
 
         
         gsap.timeline()
@@ -147,9 +195,11 @@ function Scene({deckTextureURL, wheelTextureURL, truckColor, boltColor}: Interac
 
     }
 
-    function JumpBoard(board: THREE.Group) {
+    function jumpboard(board: THREE.Group) {
 
-        gsap.timeline()
+        setAnimating(true)
+
+        gsap.timeline({onComplete: () => setAnimating(false)})
         .to(board.position, {
             y: 0.8,
             duration: 0.51,
@@ -167,7 +217,6 @@ function Scene({deckTextureURL, wheelTextureURL, truckColor, boltColor}: Interac
 
     return(
         <group>
-            <OrbitControls/>
             <Environment files={"/hdr/warehouse-256.hdr"}/>
             <group ref={originRef}>
                 <group ref={containerRef} position={[-0.25, 0, -0.635]}>
@@ -181,17 +230,17 @@ function Scene({deckTextureURL, wheelTextureURL, truckColor, boltColor}: Interac
                             boltColor={boltColor}
                             constantWheelSpin
                         />
-                       <HotSpot isVisible={showHotspot.front} position={[0, 0.38, 1]} color="#B8FC39"/>
+                       <HotSpot isVisible={!animating && showHotspot.front} position={[0, 0.38, 1]} color="#B8FC39"/>
                         <mesh position={[0, 0.27, 0.9]} name="front" onClick={onClick}>
-                            <boxGeometry args={[0.6, 0.2, .58]}/>
+                            <boxGeometry args={[0.6, 0.2, 0.58]}/>
                             <meshStandardMaterial visible={false}/>
                         </mesh>
-                        <HotSpot isVisible={showHotspot.middle} position={[0, 0.38, 0]} color="#FF7A51"/>
+                        <HotSpot isVisible={!animating && showHotspot.middle} position={[0, 0.33, 0]} color="#FF7A51"/>
                         <mesh position={[0, 0.27, 0]} name="middle" onClick={onClick}>
                             <boxGeometry args={[0.6, 0.1, 1.2]}/>
                             <meshStandardMaterial visible={false}/>
                         </mesh>
-                        <HotSpot isVisible={showHotspot.back} position={[0, 0.38, -0.9]} color="#46ACFA"/>
+                        <HotSpot isVisible={!animating && showHotspot.back} position={[0, 0.35, -0.9]} color="#46ACFA"/>
                         <mesh position={[0, 0.27, -0.9]} name="back" onClick={onClick}>
                             <boxGeometry args={[0.6, 0.2, 0.58]}/>
                             <meshStandardMaterial visible={false}/>
@@ -199,7 +248,12 @@ function Scene({deckTextureURL, wheelTextureURL, truckColor, boltColor}: Interac
                     </group>
                 </group>
             </group>
-                <ContactShadows opacity={0.6} position={[0, -0.08, 0]}/>
+            <ContactShadows opacity={0.6} position={[0, -0.08, 0]}/>
+{/*             <group position={[0, -0.09, -0.5]} rotation={[-Math.PI / 2, 0, -Math.PI / 2]} scale={[0.2, 0.2, 0.2]}>
+                <Html transform occlude="blending" >
+                    <WavyPaths/>
+                </Html>
+            </group> */}
         </group>
     )
 }
