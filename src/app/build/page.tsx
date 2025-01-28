@@ -6,6 +6,7 @@ import CustomizerControlsProvider from "./Context";
 import { createClient } from "@/prismicio";
 import { asImageSrc } from "@prismicio/client";
 import Preview from "./Preview";
+import Control from "./Control";
 
 
 export default async function Page(): Promise<React.JSX.Element> {
@@ -36,6 +37,12 @@ export default async function Page(): Promise<React.JSX.Element> {
                     <Heading as="h1" size="sm" className="mb-6 mt-0">
                         Build Your Board
                     </Heading>
+                    <Control
+                        wheels={wheels}
+                        decks={decks}
+                        metals={metals}
+                        className="mb-6"
+                    />  
                     <ButtonLink href="" color="lime" icon="plus">
                         Add to Cart
                     </ButtonLink>
