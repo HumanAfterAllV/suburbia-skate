@@ -7,6 +7,7 @@ import { createClient } from "@/prismicio";
 import { asImageSrc } from "@prismicio/client";
 import Preview from "./Preview";
 import Control from "./Control";
+import Loading from "./Loading";
 
 
 type SearchParams = {
@@ -58,6 +59,7 @@ export default async function Page(props: {searchParams: Promise<SearchParams>})
                     </ButtonLink>
                 </div>
             </CustomizerControlsProvider>
+            <Loading/>
         </div>
     )
 }

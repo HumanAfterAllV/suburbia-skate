@@ -62,7 +62,7 @@ export default async function SkateboardProduct({id}: Props): JSX.Element {
                 {product.data.name}
             </h3>
             <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                <ButtonLink field={product.data.customizer_link} color="orange" size="sm" icon="skateboard">
+                <ButtonLink field={product.data.customizer_link[0]} color="orange" size="sm" icon="skateboard">
                     Customize
                 </ButtonLink>
             </div>
