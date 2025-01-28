@@ -55,7 +55,7 @@ export default function Control({wheels, decks, metals, className}: ControlProps
                     </Option>
                 ))}
             </Options>
-            <Options title="Wheels" selectName={selectedTruck?.uid}>
+            <Options title="Wheels" selectName={selectedWheel?.uid}>
                 {wheels.map((wheel) => (
                     <Option key={wheel.uid} imageField={wheel.texture} imgixParams={{
                             rect: [20, 10, 850, 850],
