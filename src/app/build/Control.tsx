@@ -1,11 +1,12 @@
 "use client"
 
 import { Heading } from "@/components/Heading";
-import { ColorField, Content, ImageField, KeyTextField } from "@prismicio/client"
+import { ColorField, Content, ImageField, isFilled, KeyTextField } from "@prismicio/client"
 import { PrismicNextImage, PrismicNextImageProps } from "@prismicio/next";
 import clsx from "clsx";
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps, ReactNode, useEffect } from "react";
 import { useCustomizerControls } from "./Context";
+import { useRouter } from "next/navigation";
 
 
 type ControlProps = Pick<Content.BoardCustomizerDocumentData,"wheels" | "decks" | "metals"> & {
@@ -37,7 +38,36 @@ type OptionProps = Omit<ComponentProps<"button">, "children"> & {
 
 export default function Control({wheels, decks, metals, className}: ControlProps): React.JSX.Element{
 
+    const router = useRouter()
+
     const { setWheel, setDeck, setTruck, setBolt, selectedWheel, selectedTruck, selectedDeck, selectedBolt } = useCustomizerControls()
+
+    useEffect(() => {
+        const url = new URL(window.location.href)
+
+        if(isFilled.keyText(selectedWheel?.uid)) {
+            url.searchParams.set("wheel", selectedWheel?.uid)
+        } else {
+            url.searchParams.delete("wheel")
+        }
+        if(isFilled.keyText(selectedDeck?.uid)) {
+            url.searchParams.set("deck", selectedDeck?.uid)
+        } else {
+            url.searchParams.delete("deck")
+        }
+        if(isFilled.keyText(selectedTruck?.uid)) {
+            url.searchParams.set("truck", selectedTruck?.uid)
+        } else {
+            url.searchParams.delete("truck")
+        }
+        if(isFilled.keyText(selectedBolt?.uid)) {
+            url.searchParams.set("bolt", selectedBolt?.uid)
+        } else {
+            url.searchParams.delete("bolt")
+        }
+
+        return router.replace(url.toString())
+    },[selectedWheel, selectedDeck, selectedTruck, selectedBolt, router])
     
     return(
         <div className={clsx("flex flex-col gap-6", className)}>

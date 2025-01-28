@@ -9,15 +9,25 @@ import Preview from "./Preview";
 import Control from "./Control";
 
 
-export default async function Page(): Promise<React.JSX.Element> {
+type SearchParams = {
+    deck?: string;
+    wheel?: string;
+    truck?: string;
+    bolt?: string;
+}
+
+export default async function Page(props: {searchParams: Promise<SearchParams>}): Promise<React.JSX.Element> {
+
+    const searchParams = await props.searchParams;
+
     const client = createClient();
     const customizerSetting = await client.getSingle("board_customizer")
     const { wheels, decks, metals } = customizerSetting.data;
 
-    const defaultWheel = wheels[0];
-    const defaultDeck = decks[0];
-    const defaultTruck = metals[0];
-    const defaultBolt = metals[0];
+    const defaultWheel = wheels.find((wheel) => wheel.uid === searchParams.wheel) ?? wheels[0];
+    const defaultDeck = decks.find((deck) => deck.uid === searchParams.deck) ?? decks[0];
+    const defaultTruck = metals.find((metal) => metal.uid === searchParams.truck) ?? metals[0];
+    const defaultBolt = metals.find((metal) => metal.uid === searchParams.bolt) ?? metals[0];
 
     const wheelTextureURLs = wheels.map((texture) => asImageSrc(texture.texture)).filter((url): url is string => Boolean(url) );
     const deckTextureURLs = decks.map((texture) => asImageSrc(texture.texture)).filter((url): url is string => Boolean(url) );
@@ -51,3 +61,5 @@ export default async function Page(): Promise<React.JSX.Element> {
         </div>
     )
 }
+
+
