@@ -3,6 +3,7 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 
 import { Bounded } from "@/components/Bounded";
 import { Heading } from "@/components/Heading";
+
 import SkateboardProduct from "./SkateboardProduct";
 import SlideIn from "@/components/SlideIn";
 

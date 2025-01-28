@@ -1,12 +1,14 @@
 "use client"
 
-import { CameraControls, Environment, Preload, useTexture } from "@react-three/drei";
 import * as THREE from "three"
-import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useRef } from "react";
-import { useCustomizerControls } from "./Context";
+import { CameraControls, Environment, Preload, useTexture } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 import { asImageSrc } from "@prismicio/client";
+
 import { Skateboard } from "@/components/Skateboard";
+
+import { useCustomizerControls } from "./Context";
 
 type PreviewProps = {
     wheelTextureURLs: string[];

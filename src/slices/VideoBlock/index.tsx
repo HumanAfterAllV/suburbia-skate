@@ -1,10 +1,10 @@
-import { Bounded } from "@/components/Bounded";
+import Image from "next/image";
+import clsx from "clsx";
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import { LazyYouTubePlayer } from "./LazyYoutubePlayer";
-import clsx from "clsx";
-import Image from "next/image";
 
+import { LazyYouTubePlayer } from "./LazyYoutubePlayer";
+import { Bounded } from "@/components/Bounded";
 /**
  * Props for `VideoBlock`.
  */

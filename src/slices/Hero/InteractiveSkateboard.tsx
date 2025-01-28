@@ -1,11 +1,13 @@
 "use client"
 
+import { Suspense, useEffect, useRef, useState } from "react"
 import * as THREE from "three" 
-import { Skateboard } from "@/components/Skateboard"
+import gsap from "gsap"
 import { ContactShadows, Environment, /* Html */ } from "@react-three/drei"
 import { Canvas, ThreeEvent, useThree } from "@react-three/fiber"
-import { Suspense, useEffect, useRef, useState } from "react"
-import gsap from "gsap"
+
+import { Skateboard } from "@/components/Skateboard"
+
 import HotSpot from "./HotSpot"
 /* import { WavyPaths } from "./WavyPaths" */
 

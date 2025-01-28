@@ -1,8 +1,9 @@
 "use client"
 
-import { Logo } from "@/components/Logo";
-import { useProgress } from "@react-three/drei";
 import clsx from "clsx";
+import { useProgress } from "@react-three/drei";
+
+import { Logo } from "@/components/Logo";
 
 export default function Loading() {
   const { progress } = useProgress();

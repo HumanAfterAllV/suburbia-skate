@@ -1,13 +1,14 @@
-import { ButtonLink } from "@/components/ButtonLink";
-import { HorizontalLine, VerticalLine } from "@/components/Line";
 import { createClient } from "@/prismicio"
 import { Content, isFilled } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import clsx from "clsx";
 import { FaStar } from "react-icons/fa6";
-import { Scribble } from "./Scribble";
 
-type Props = {
+import { Scribble } from "./Scribble";
+import { ButtonLink } from "@/components/ButtonLink";
+import { HorizontalLine, VerticalLine } from "@/components/Line";
+
+type SkateboardProductProps = {
     id: string
 }
 
@@ -28,7 +29,7 @@ async function getDominantColor(url: string): Promise<string> {
     }
 }
 
-export default async function SkateboardProduct({id}: Props): JSX.Element {
+export default async function SkateboardProduct({id}: SkateboardProductProps): Promise<React.JSX.Element> {
     
     const VERTICAL_LINE_CLASS = "absolute top-0 h-full stroke-2 text-stone-300 transition-colors group-hover:text-stone-400";
     const HORIZONTAL_LINE_CLASS = "~mx-8 stroke-2 text-stone-300 transition-colors group-hover:text-stone-400";

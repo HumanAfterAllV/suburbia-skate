@@ -1,10 +1,12 @@
-import { ButtonLink } from "@/components/ButtonLink";
-import { Heading } from "@/components/Heading";
-import { Logo } from "@/components/Logo";
 import Link from "next/link";
-import CustomizerControlsProvider from "./Context";
 import { createClient } from "@/prismicio";
 import { asImageSrc } from "@prismicio/client";
+
+import { ButtonLink } from "@/components/ButtonLink";
+import { Logo } from "@/components/Logo";
+import { Heading } from "@/components/Heading";
+
+import CustomizerControlsProvider from "./Context";
 import Preview from "./Preview";
 import Control from "./Control";
 import Loading from "./Loading";

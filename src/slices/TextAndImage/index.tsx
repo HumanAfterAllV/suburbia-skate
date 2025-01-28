@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-
 import { Content } from "@prismicio/client";
+
 import { Bounded } from "@/components/Bounded";
 import { Heading } from "@/components/Heading";
 import { ButtonLink } from "@/components/ButtonLink";

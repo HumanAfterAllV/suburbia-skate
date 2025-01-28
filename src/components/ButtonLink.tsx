@@ -1,6 +1,6 @@
+import clsx from "clsx";
 import { FaCartShopping, FaPlus } from "react-icons/fa6";
 import { PrismicNextLink, PrismicNextLinkProps } from "@prismicio/next";
-import clsx from "clsx";
 
 export type ButtonProps = PrismicNextLinkProps & {
   color?: "orange" | "purple" | "lime";

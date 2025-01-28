@@ -1,12 +1,14 @@
 "use client"
 
-import { Heading } from "@/components/Heading";
+import { ComponentProps, ReactNode, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+import clsx from "clsx";
 import { ColorField, Content, ImageField, isFilled, KeyTextField } from "@prismicio/client"
 import { PrismicNextImage, PrismicNextImageProps } from "@prismicio/next";
-import clsx from "clsx";
-import { ComponentProps, ReactNode, useEffect } from "react";
+
 import { useCustomizerControls } from "./Context";
-import { useRouter } from "next/navigation";
+import { Heading } from "@/components/Heading";
 
 
 type ControlProps = Pick<Content.BoardCustomizerDocumentData,"wheels" | "decks" | "metals"> & {

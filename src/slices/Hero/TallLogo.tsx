@@ -2,6 +2,7 @@
 
 import { SVGProps } from "react";
 import clsx from "clsx";
+
 import { useIsSafari } from "@/lib/useIsSafari";
 
 export function TallLogo({ className, ...props }: SVGProps<SVGSVGElement>) {

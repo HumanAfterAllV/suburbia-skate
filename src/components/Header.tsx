@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ButtonLink } from "./ButtonLink";
-import { Logo } from "./Logo";
-import { createClient } from "@/prismicio";
 import { PrismicNextLink } from "@prismicio/next";
+import { createClient } from "@/prismicio";
 
-export async function Header(): JSX.Element {
+import { Logo } from "./Logo";
+import { ButtonLink } from "./ButtonLink";
+
+export async function Header(): Promise<React.JSX.Element> {
 
     const client = createClient();
     const settings = await client.getSingle("settings");

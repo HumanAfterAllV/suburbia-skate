@@ -1,7 +1,7 @@
 "use client"
 
-import { Content } from "@prismicio/client"
 import { createContext, useContext, useMemo, useState } from "react"
+import { Content } from "@prismicio/client"
 
 type CustomizerControlsContext = {
     selectedWheel? : Content.BoardCustomizerDocumentDataWheelsItem;

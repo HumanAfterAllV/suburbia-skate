@@ -1,9 +1,9 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { ImageField } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import clsx from "clsx";
-import { useEffect, useRef } from "react";
 
 type ParallaxProps = {
     foregroundImage: ImageField;

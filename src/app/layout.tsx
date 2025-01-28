@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Bowlby_One_SC, DM_Mono } from "next/font/google";
-
+import { createClient } from "@/prismicio";
 
 import "./globals.css";
-import { createClient } from "@/prismicio";
 
 const bowlby = Bowlby_One_SC({
   display: "swap",
