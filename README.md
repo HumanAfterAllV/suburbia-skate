@@ -42,7 +42,6 @@ Welcome to Suburbia - A modern skateboarding e-commerce and community platform b
 - **3D Graphics:** [Three.js](https://threejs.org/) - JavaScript 3D library
 - **Animations:** [GSAP](https://greensock.com/gsap/) - Professional-grade animation library
 - **Database:** [Prisma](https://www.prisma.io/) - Next-generation Node.js and TypeScript ORM
-- **Authentication:** NextAuth.js
 - **Deployment:** Vercel
 
 ## 📱 Pages and Features
